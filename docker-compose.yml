@@ -1,0 +1,51 @@
+version: "3.6"
+services:
+
+  nexus:
+    image: sonatype/nexus3
+    ports:
+      - "8081:8081"
+      - "5005-5020:5005-5020"
+    volumes:
+        - nexus-data:/nexus-data
+    networks:
+      local:
+        ipv4_address: 10.0.0.2
+    tty: true
+    stdin_open: true
+
+  yumhost:
+    image: centos
+    networks:
+      local:
+        ipv4_address: 10.0.0.3
+    tty: true
+    stdin_open: true
+    volumes:
+        - centos-data:/etc/yum.repo.d/
+
+  apthost:
+    image: ubuntu
+    networks:
+      local:
+        ipv4_address: 10.0.0.4
+    tty: true
+    stdin_open: true
+    volumes:
+        - debain-data:/etc/apt/
+
+networks:
+  local:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24
+
+volumes:
+  nexus-data:
+      external: true
+  centos-data:
+      external: true
+  debain-data:
+      external: true
+
