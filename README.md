@@ -45,3 +45,7 @@ Assuming the `centos-backup.tar` file exists and `centos-test` is a docker volum
 * `docker run --rm --volumes-from testnexus_yumhost_1 -v $PWD:/backup centos bash -c "cd /etc/yum.repos.d && tar xvf /backup/centos-backup.tar --strip 1"`.
 
 This extracts `centos-backup.tar` into `/etc/yum.repos.d` thus, the backed up data is copied into the volume `centos-data` as it's mounted on `/etc/yum.repos.d`.
+
+-------------------------------------------
+
+### Note: This document assumes you work directly from this repo after clonig it. If you moved the contents of this repo it to a different directory, change the container namings as well.
