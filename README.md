@@ -48,4 +48,5 @@ This extracts `centos-backup.tar` into `/etc/yum.repos.d` thus, the backed up da
 
 -------------------------------------------
 
-### Note: This document assumes you work directly from this repo after clonig it. If you moved the contents of this repo it to a different directory, change the container namings as well.
+#### Note 
+* This document assumes you work directly from this repo after clonig it. If you moved the contents of this repo it to a different directory, change the container namings as well.
