@@ -10,7 +10,7 @@ https://docs.docker.com/install/
 6. Use the scripts `attachToApthost.sh` and `attachToYumhost.sh` to attach to `apt` and `yum` containers in order to  configure new repos from within. 
 
 ## How do backup/restore work
-**Goal:** generate a tar file on localhost's CWD by tarballing the data directory of Nexus. 
+**Goal:** generate a tar file on localhost's CWD by tarballing the data directory of Nexus. Extract this tarball in data directory of Nexus for volume restoration.
 1. A sidecar container is used to execute the tar command, and output the tar file in the directory that is bounded with the localhost's CWD. 
 2. A sidecar container is used to execute the untar command, and output the extracted files into the data directory in Nexus container.
 
