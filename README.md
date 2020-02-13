@@ -3,11 +3,16 @@
 1. Install docker and docker-compose, for that follow these docs:
 https://docs.docker.com/install/
 https://docs.docker.com/install/
-2. Restore the `*-backup.tar` files as docker volumes from this README file in the section below.
+2. Restore the `*-backup.tar` files as docker volumes. Use the section below.
 3. Run the environment using `docker-compose up -d`.
 4. Check the running environment from browser `localhost:8081`. Use `user: admin` and `password: admin` as creds.
 5. Use the scripts `debpush.sh` and `rpmpush.sh` to push test packages to the corresponding repo.
 6. Use the scripts `attachToApthost.sh` and `attachToYumhost.sh` to attach to `apt` and `yum` containers in order to  configure new repos from within. 
+
+## How do backup/restore work
+**Goal:** generate a tar file on localhost's CWD by tarballing the data directory of Nexus. 
+1. A sidecar container is used to execute the tar command, and output the tar file in the directory that is bounded with the localhost's CWD. 
+2. A sidecar container is used to execute the untar command, and output the extracted files into the data directory in Nexus container.
 
 ## Backup docker volumes for nexus container
 1. `docker run -itd -v nexus-data:/nexus-data --name nexus sonatype/nexus3`.
@@ -23,7 +28,7 @@ This extracts `nexus-backup.tar` into `/nexus-data` thus, the backed up data is 
 -------------------------------------------
 
 ## Backup docker volumes for debian container
-1. `docker run -itd -v debian-data:/etc/apt --name temp bash`
+1. `docker run -itd -v debian-data:/etc/apt --name temp debian bash`
 2. `docker run --rm --volumes-from temp -v $PWD:/backup ubuntu tar cvf /backup/debian-backup.tar /etc/apt`
 
 This outputs a `debian-backup.tar` file in the working directory.
